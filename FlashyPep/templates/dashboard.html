@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <style>
+            body{
+              background-image: url("{{ url_for('static', filename='img/back.jpg') }}");
+              background-size: 100% 400%;
+              
+              background-repeat: no-repeat;
+            }
+         </style>
+    </head>
+
+    <body>
+      <h4></h4>
+        <header class="p-3 bg-primary text-white">
+            <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                FlashyPep</a>
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="/" class="d-flex align-items-right mb-2 mb-lg-0 text-white text-decoration-none"> &nbsp Home</a></li>
+                </ul>
+
+                <div class="text-end">
+                <a href="{{ url_for('views.logout') }}" class="btn btn-danger">Logout</a>
+                <a href="{{ url_for('views.register') }}" class="btn btn-warning">Sign-up</a>
+                </div>
+            </div>
+            </div>
+        </header>
+
+        <div class="container mt-5 mb-5">
+            <div class="row mt-1">
+                {% for d in decks %}
+                <div class="col-md-4">
+                    <div class= "container">
+                        <div class="card">
+                            <div class="front">{{ d['deck_name'] }}</div>
+                            <div class="back">
+                                <ul>
+                                    <li> score: {{ d['score'] }} </li>
+                                    <li> last rev. time:{{ d['last_rev'] }} </li>
+                                </ul>
+                                <div class="btn-group" role="group">
+                                    <a href="/review/{{ d['deck_name'] }}" class="btn btn-outline-dark">Add Cards/Review</a>
+                                    <a href="/{{ user }}/deck/{{ d['deck_name'] }}/delete" class="btn btn-outline-dark">Delete Deck</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="col-md-4">
+                    <!-- Button trigger modal -->
+                    
+                    <button type="button" class="btn btn-success add" data-toggle="modal" data-target="#exampleModal">
+                        Add Deck
+                    </button>
+                    
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <form class="row g-3" action="/api/deck/{{ user }}" method="POST">
+                              <div class="col-auto">
+                                <label for="deckname" class="visually-hidden">Deck Name</label>
+                                <input type="text" class="form-control" id="inputPassword2" placeholder="Deck Name" name="deck_name">
+                              </div>
+                              <div class="col-auto">
+                                <button type="submit" class="btn btn-primary mb-3">Add</button>
+                              </div>
+                            </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
