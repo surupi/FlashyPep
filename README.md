@@ -1,12 +1,8 @@
-This is the README file for my final project about a flashcard app. I have named my project FlashyPep.
+#FlashyPep
+An app for flashcards
 
+This app is made using flask, SQLite, jinja, HTML and CSS
 
-Running the project on replit:
+Using this one can register or login in to the app, and then can create there own flashcard decks. They can also delete existing deck which will no longer be used. There is privacy, that no one else can see your decks unless you give them your credentials.
 
-1. Upload the folder called FlashyPep onto replit, along with main.py, project Report.pdf, project.yaml and README.md.
-
-2. Click on green button on top of teh screen called Run. You will see all the modules and other necessary things for this project will start to download on its own.
-
-3. An url will load on the replit screen, click on the very right corner click on the pop out button
-
-4. Now you will be able to see the full webpage
+Inside the deck, one can add or delete cards as per their choice. While adding a card they can input values which will get displayed at the front and back of their individual flashcard. The smooth transition from the front to back makes this app very user friendly.
