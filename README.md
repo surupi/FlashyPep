@@ -1,4 +1,4 @@
-#FlashyPep
+FlashyPep
 An app for flashcards
 
 This app is made using flask, SQLite, jinja, HTML and CSS
